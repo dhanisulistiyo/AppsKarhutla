@@ -1,0 +1,34 @@
+page-account {
+  .card {
+    margin: 0px;
+    border-radius: 0px;
+    width: 100%;
+  }
+  ion-card-content {
+    background-color: map-get($colors, primary);
+    color: #ffffff;
+    text-align: center;
+    background-image: url("../assets/imgs/background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    img {
+      width: 9em;
+      height: 9em;
+      border-radius: 50%;
+      border: solid 0.2em #ffffff;
+      display: inline;
+    }
+    h2.title-header {
+      font-family: "Quicksand", sans-serif;
+      font-size: 4.3vw;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      color: white;
+    }
+    h3.title-description {
+      font-family: "Quicksand", sans-serif;
+      font-size: 3.5vw;
+      color: white;
+    }
+  }
+}
