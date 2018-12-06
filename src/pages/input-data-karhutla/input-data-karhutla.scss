@@ -1,3 +1,13 @@
 page-input-data-karhutla {
+  .text-input[disabled] {
+    opacity: 1;
+  }
+  .select-text {
+    white-space: pre-wrap;
+  }
 
+  .card-header-md {
+    font-size: 2rem;
+    text-align: center;
+  }
 }

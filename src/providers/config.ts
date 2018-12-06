@@ -13,12 +13,18 @@ export class ConfigProvider {
   baseUrl;
   constructor( public alertCtrl : AlertController) {
     console.log("Hello ConfigProvider Provider");
-    this.baseUrl = "http://localhost:8080/siavipala/public";
+    // this.baseUrl = "http://localhost:8080/siavipala/public";
+    this.baseUrl = "http://103.129.220.174/siavipala/public"
   }
 
-  showError(text) {
+  convertMessage(err){
+    if(err.status == 0) return 'Masalah Koneksi'
+    else  return JSON.parse(err['_body']).message
+  }
+
+  showAllert(status,text) {
     let alert = this.alertCtrl.create({
-      title: "Failed!",
+      title: status,
       subTitle: text,
       buttons: ["OK"]
     });

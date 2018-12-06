@@ -1,33 +1,76 @@
-import { Component } from "@angular/core";
-import { Platform } from "ionic-angular";
+import { ConfigProvider } from "./../providers/config";
+import { GeneralServiceProvider } from "./../providers/general-service";
+import { Component, ViewChild } from "@angular/core";
+import { Platform, Nav } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { TabsPage } from "../pages/tabs/tabs";
-import { LoginPage } from "../pages/login/login";
 import { AuthServiceProvider } from "../providers/auth-service";
+import { LoginPage } from "../pages/login/login";
 
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
   rootPage: any;
 
+  pages: Array<{ title: string; component: any }>;
+
   constructor(
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
-    public auth: AuthServiceProvider
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public auth: AuthServiceProvider,
+    public gen: GeneralServiceProvider,
+    public conf: ConfigProvider
   ) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+    this.initializeApp();
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: "Sipongi Live Update", component: TabsPage },
+      { title: "Logout", component: null }
+    ];
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
       this.auth.loadUserCredentials();
       if (this.auth.AuthToken == null || this.auth.AuthToken == undefined)
         this.rootPage = LoginPage;
-      else this.rootPage = TabsPage;
+      else {
+        this.gen.checkToken().then(
+          data => {
+            console.log(data);
+            if (data.status == 401) {
+              this.rootPage = LoginPage;
+              this.conf.showAllert("Failed", "Token Expired");
+            } else if (data.status == 0 || data.status > 401) {
+              this.rootPage = LoginPage;
+              this.conf.showAllert("Failed", "Connection Problem");
+            } else {
+              this.gen.getAllData();
+              this.rootPage = TabsPage;
+            }
+          },
+          err => {
+            this.rootPage = LoginPage;
+            console.log(err);
+          }
+        );
+      }
     });
+  }
+
+  openPage(page) {
+    if (page.component != null) this.nav.setRoot(page.component);
+    else {
+      this.auth.destroyUserCredentials();
+      this.nav.setRoot(LoginPage);
+    }
   }
 }

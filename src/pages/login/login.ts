@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, LoadingController } from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  LoadingController,
+  MenuController
+} from "ionic-angular";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { TabsPage } from "../tabs/tabs";
 import { NgZone } from "@angular/core";
@@ -20,14 +25,16 @@ export class LoginPage {
     private zone: NgZone,
     public auth: AuthServiceProvider,
     public loadingCtrl: LoadingController,
-    public conf: ConfigProvider
+    public conf: ConfigProvider,
+    public menuCtrl: MenuController
   ) {
     this.LoginUser = this.formBuilder.group({
-      email: ["ramdan@gmail.com", Validators.required],
+      email: ["dhani@gmail.com", Validators.required],
       password: ["123", Validators.required]
     });
   }
   ionViewWillEnter() {
+    this.menuCtrl.enable(false, "myMenu");
     let tabs = document.querySelectorAll(".tabbar");
     if (tabs !== null) {
       Object.keys(tabs).map(key => {
@@ -37,6 +44,7 @@ export class LoginPage {
   }
 
   ionViewDidLeave() {
+    this.menuCtrl.enable(true, "myMenu");
     let tabs = document.querySelectorAll(".tabbar");
     if (tabs !== null) {
       Object.keys(tabs).map(key => {
@@ -55,23 +63,26 @@ export class LoginPage {
   authLogin = () => {
     console.log(this.LoginUser.value);
     let loading = this.loadingCtrl.create({
-      content: 'Loading Please Wait...',
+      content: "Loading Please Wait...",
       enableBackdropDismiss: true
     });
     loading.present();
-    this.auth.login(this.LoginUser.value).subscribe(data => {
-      console.log(data.data)
-      this.auth.storeUserCredentials(data.data.token)
-      loading.dismiss();
-      this.zone.run(() => {
-        this.navCtrl.setRoot(TabsPage);
-      });
-    }, err => {
-      console.log(err)
-      if (err.status == 401) this.conf.showError("Email dan Password salah!")
-      else this.conf.showError("Masalah koneksi!")
-      loading.dismiss();
-    })
-
+    this.auth.login(this.LoginUser.value).subscribe(
+      data => {
+        console.log(data.data);
+        this.auth.storeUserCredentials(data.data.token);
+        loading.dismiss();
+        this.zone.run(() => {
+          this.navCtrl.setRoot(TabsPage);
+        });
+      },
+      err => {
+        console.log(err);
+        if (err.status == 401)
+          this.conf.showAllert("Failed!", "Email dan Password salah!");
+        else this.conf.showAllert("Failed!", "Masalah koneksi!");
+        loading.dismiss();
+      }
+    );
   };
 }

@@ -1,152 +1,669 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Input Data Patroli</ion-title>
-  </ion-navbar>
-
+  <ion-navbar> <ion-title>Input Data Patroli</ion-title> </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label color="black" floating>Tanggal </ion-label>
-      <ion-input disabled="true" [(ngModel)]="Data.tanggal_patroli"></ion-input>
-    </ion-item>
+  <ion-card>
+    <ion-list>
+      <ion-card-header>
+        Laporan Patroli <br />
+        Tanggal {{ Data.tanggal_patroli | date: "dd MMMM yyyy" }}
+      </ion-card-header>
+      <ion-item>
+        <ion-label>Kategori Patroli</ion-label>
+        <ion-select
+          placeholder="Pilih Kategori"
+          [(ngModel)]="Data.kategori_patroli_id"
+        >
+          <ion-option *ngFor="let c of KategoriPatroli" [value]="c.id">{{
+            c.nama
+          }}</ion-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Kategori Patroli</ion-label>
-      <ion-select placeholder="Pilih Kategori" [(ngModel)]="Data.kategori_patroli_id">
-        <ion-option *ngFor="let c of KategoriPatroli" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Jenis Patroli</ion-label>
-      <ion-select placeholder="Pilih Jenis Patroli" [(ngModel)]="Data.jenis_patroli">
-        <ion-option *ngFor="let c of JenisPatroli" [value]="c">{{c | toLower}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Desa</ion-label>
-      <ion-select placeholder="Pilih Desa" [(ngModel)]="Data.desa_kelurahan_id">
-        <ion-option *ngFor="let c of ListDesa" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Cuaca Pagi</ion-label>
-      <ion-select placeholder="Pilih Cuaca" [(ngModel)]="Data.cuaca_pagi_id">
-        <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Cuaca Siang</ion-label>
-      <ion-select placeholder="Pilih Cuaca" [(ngModel)]="Data.cuaca_siang_id">
-        <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Cuaca Sore</ion-label>
-      <ion-select placeholder="Pilih Cuaca" [(ngModel)]="Data.cuaca_sore_id">
-        <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Curah Hujan</ion-label>
-      <ion-select placeholder="Pilih Curah Hujan" [(ngModel)]="Data.cuaca_sore_id">
-        <ion-option *ngFor="let c of ListCurahHujan" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="black" floating>Suhu</ion-label>
-      <ion-input type="number" [(ngModel)]="Data.suhu"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="black" floating>Kelembapan</ion-label>
-      <ion-input type="number" [(ngModel)]="Data.kelembapan"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="black" floating>Kecepatan Angin</ion-label>
-      <ion-input type="number" [(ngModel)]="Data.kecepatan_angin"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>FFMC KKAS</ion-label>
-      <ion-select placeholder="Pilih" [(ngModel)]="Data.ffmc_kkas_id">
-        <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>FWI ICK</ion-label>
-      <ion-select placeholder="Pilih" [(ngModel)]="Data.fwi_id">
-        <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>DC KK</ion-label>
-      <ion-select placeholder="Pilih" [(ngModel)]="Data.dc_kk_id">
-        <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Inventori Patroli</ion-label>
-      <ion-select placeholder="Pilih Inventori Patroli" [(ngModel)]="Data.Inventori_patroli">
-        <ion-option *ngFor="let c of ListCurahHujan" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Aktivitas Harian</ion-label>
-      <ion-select placeholder="Pilih Aktivitas Harian" [(ngModel)]="Data.aktivitas_harian_patroli">
-        <ion-option *ngFor="let c of ListCurahHujan" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Anggota Patroli</ion-label>
-      <ion-select placeholder="Anggota Patroli" [(ngModel)]="Data.anggota_patroli">
-        <ion-option *ngFor="let c of ListCurahHujan" [value]="c.id">{{c.nama}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-
-    <ion-item>
-      <ion-label>Anggota Team</ion-label>
-      <ion-select [(ngModel)]="toppings" multiple="true" cancelText="Cancel" okText="Save">
-        <ion-option value="bacon">Jajang</ion-option>
-        <ion-option value="olives">Ujang</ion-option>
-        <ion-option value="xcheese">Parman</ion-option>
-        <ion-option value="peppers">Jaka</ion-option>
-        <ion-option value="mushrooms">Mukhlis</ion-option>
-        <ion-option value="onions">Iman</ion-option>
-        <ion-option value="pepperoni">Tarno</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-row>
-      <ion-col col-8>
+      <!--
         <ion-item>
-          <ion-label floating>Upload image</ion-label>
-          <ion-input disabled type="text"></ion-input>
+          <ion-label>Inventori Patroli</ion-label>
+          <ion-select placeholder="Pilih Inventori Patroli" [(ngModel)]="Data.Inventori_patroli">
+            <ion-option *ngFor="let c of List" [value]="c.id">{{c.nama}}</ion-option>
+          </ion-select>
         </ion-item>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button color="light" class="btn-browse" (click)="presentActionSheet()">Browse</button>
-      </ion-col>
-    </ion-row>
-  </ion-list>
-  <img [src]="base64Image" *ngIf="base64Image" />
+      -->
 
+      <ion-item>
+        <ion-label>Aktivitas Harian</ion-label>
+        <ion-select
+          placeholder="Pilih Aktivitas Harian"
+          multiple="true"
+          [(ngModel)]="Data.aktivitas_harian_patroli"
+        >
+          <ion-option *ngFor="let c of ListAktivitas" [value]="c">{{
+            c.nama
+          }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Anggota Patroli</ion-label>
+        <ion-select
+          placeholder="Anggota Patroli"
+          multiple="true"
+          [(ngModel)]="Data.anggota_patroli"
+        >
+          <ion-option *ngFor="let c of ListAnggota" [value]="c">{{
+            c.nama
+          }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card style="text-align: center;">
+    <div *ngFor="let item of Data.images"><img [src]="item" /></div>
+
+    <button
+      ion-button
+      color="light"
+      class="btn-browse"
+      (click)="presentActionSheet()"
+    >
+      Tambah Gambar
+    </button>
+  </ion-card>
+
+  <div style="text-align: center;" *ngIf="Data.patroli_darat.length != 0">
+    <ion-card>
+      <ion-card-header>Patroli Darat</ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-label>Desa</ion-label>
+          <ion-select
+            placeholder="Pilih Desa"
+            [(ngModel)]="Data.patroli_darat.desa_kelurahan_id"
+          >
+            <ion-option *ngFor="let c of ListDesa" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cuaca Pagi</ion-label>
+          <ion-select
+            placeholder="Pilih Cuaca"
+            [(ngModel)]="Data.patroli_darat.cuaca_pagi_id"
+          >
+            <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cuaca Siang</ion-label>
+          <ion-select
+            placeholder="Pilih Cuaca"
+            [(ngModel)]="Data.patroli_darat.cuaca_siang_id"
+          >
+            <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cuaca Sore</ion-label>
+          <ion-select
+            placeholder="Pilih Cuaca"
+            [(ngModel)]="Data.patroli_darat.cuaca_sore_id"
+          >
+            <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Curah Hujan</ion-label>
+          <ion-select
+            placeholder="Pilih Curah Hujan"
+            [(ngModel)]="Data.patroli_darat.curah_hujan_id"
+          >
+            <ion-option *ngFor="let c of ListCurahHujan" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Suhu</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_darat.suhu"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kelembaban</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_darat.kelembaban"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kecepatan Angin</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_darat.kecepatan_angin"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>FFMC KKAS</ion-label>
+          <ion-select
+            placeholder="Pilih"
+            [(ngModel)]="Data.patroli_darat.ffmc_kkas_id"
+          >
+            <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>FWI ICK</ion-label>
+          <ion-select
+            placeholder="Pilih"
+            [(ngModel)]="Data.patroli_darat.fwi_id"
+          >
+            <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>DC KK</ion-label>
+          <ion-select
+            placeholder="Pilih"
+            [(ngModel)]="Data.patroli_darat.dc_kk_id"
+          >
+            <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Latitude</ion-label>
+          <ion-input
+            disabled="true"
+            [(ngModel)]="Data.patroli_darat.latitude"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Longitude</ion-label>
+          <ion-input
+            disabled="true"
+            [(ngModel)]="Data.patroli_darat.longitude"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-row
+        ><ion-col
+          ><button ion-button icon-add full (click)="getlocation()">
+            Lokasi saat ini
+          </button></ion-col
+        >
+        <ion-col>
+          <button ion-button icon-add full (click)="goMapDarat()">
+            Lihat Map
+          </button></ion-col
+        >
+      </ion-row>
+    </ion-card>
+    <div *ngIf="Data.patroli_darat.hasil_uji != undefined">
+      <ion-card *ngIf="Data.patroli_darat.hasil_uji.length != 0">
+        <ion-card-header>Hasil Uji</ion-card-header>
+        <ion-list
+          *ngFor="let item of Data.patroli_darat.hasil_uji; let i = index"
+        >
+          <span>Data {{ i + 1 }}</span>
+          <ion-item>
+            <ion-label stacked>Nama Pengujian</ion-label>
+            <ion-input
+              [(ngModel)]="item.nama_pengujian"
+              placeholder="Masukan nama pengujian"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Hasil Pengujian</ion-label>
+            <ion-input
+              [(ngModel)]="item.hasil"
+              placeholder="Masukan hasil pengujian"
+            ></ion-input>
+          </ion-item>
+          <button
+            ion-button
+            outline
+            (click)="deleteData(Data.patroli_darat.hasil_uji, i)"
+          >
+            Hapus data
+          </button>
+        </ion-list>
+      </ion-card>
+    </div>
+    <ion-card *ngIf="Data.patroli_darat.kondisi_sumber_air.length != 0">
+      <ion-card-header>Kondisi Sumber Air</ion-card-header>
+      <ion-list
+        *ngFor="
+          let item of Data.patroli_darat.kondisi_sumber_air;
+          let i = index
+        "
+      >
+        <span>Data {{ i + 1 }}</span>
+        <ion-item>
+          <ion-label>Sumber Air</ion-label>
+          <ion-select
+            placeholder="Pilih sumber air"
+            [(ngModel)]="item.sumber_air_id"
+          >
+            <ion-option *ngFor="let c of ListSumberAir" [value]="c.id">{{
+              c.name
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Panjang</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.panjang"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Lebar</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.lebar"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kedalaman</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.kedalaman"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+        <button
+          ion-button
+          outline
+          (click)="deleteData(Data.patroli_darat.kondisi_sumber_air, i)"
+        >
+          Hapus data
+        </button>
+      </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="Data.patroli_darat.kondisi_vegetasi.length != 0">
+      <ion-card-header>Kondisi Vegetasi</ion-card-header>
+      <ion-list
+        *ngFor="let item of Data.patroli_darat.kondisi_vegetasi; let i = index"
+        ><span>Data {{ i + 1 }}</span>
+        <ion-item>
+          <ion-label>Vegetasi</ion-label>
+          <ion-select
+            placeholder="Pilih Vegetasi"
+            [(ngModel)]="item.vegetasi_id"
+          >
+            <ion-option *ngFor="let c of ListVegetasi" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Kategori Kondisi Vegetasi</ion-label>
+          <ion-select
+            placeholder="Pilih kategori"
+            [(ngModel)]="item.kategori_kondisi_vegetasi_id"
+          >
+            <ion-option *ngFor="let c of KondisiVegetasi" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Luas Tanah</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.luas_tanah"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+        <button
+          ion-button
+          outline
+          (click)="deleteData(Data.patroli_darat.kondisi_vegetasi, i)"
+        >
+          Hapus data
+        </button>
+      </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="Data.patroli_darat.kondisi_tanah.length != 0">
+      <ion-card-header>Kondisi Tanah</ion-card-header>
+      <ion-list
+        *ngFor="let item of Data.patroli_darat.kondisi_tanah; let i = index"
+      >
+        <span>Data {{ i + 1 }}</span>
+        <ion-item>
+          <ion-label>Jenis Tanah</ion-label>
+          <ion-select
+            placeholder="Pilih jenis tanah"
+            [(ngModel)]="item.tanah_id"
+          >
+            <ion-option *ngFor="let c of ListTanah" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kedalaman Gambut</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.kedalaman_gambut"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Luas Tanah</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.luas_tanah"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+        <button
+          ion-button
+          outline
+          (click)="deleteData(Data.patroli_darat.kondisi_tanah, i)"
+        >
+          Hapus data
+        </button>
+      </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="Data.patroli_darat.pemadaman.length != 0">
+      <ion-card-header>Pemadaman</ion-card-header>
+      <ion-list
+        *ngFor="let item of Data.patroli_darat.pemadaman; let i = index"
+      >
+        <span>Data {{ i + 1 }}</span>
+        <ion-item>
+          <ion-label>Tipe Kebakaran</ion-label>
+          <ion-select
+            placeholder="Pilih tipe"
+            [(ngModel)]="item.tipe_kebakaran_id"
+          >
+            <ion-option *ngFor="let c of ListTipeKebakaran" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Pemilik Lahan</ion-label>
+          <ion-select
+            placeholder="Pilih pemilik lahan"
+            [(ngModel)]="item.pemilik_lahan_id"
+          >
+            <ion-option *ngFor="let c of ListPemilikLahan" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Luas yang Terbakar</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.luas_terbakar"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Luas Dipadamkan</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="item.luas_dipadamkan"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Hasil Pemadaman</ion-label>
+          <ion-input
+            [(ngModel)]="item.hasil_pemadaman"
+            placeholder="Masukan hasil pemadaman"
+          ></ion-input>
+        </ion-item>
+        <button
+          ion-button
+          outline
+          (click)="deleteData(Data.patroli_darat.pemadaman, i)"
+        >
+          Hapus data
+        </button>
+      </ion-list>
+    </ion-card>
+
+    <button ion-button icon-addt round (click)="actionSheetAddData()">
+      Tambah Data Observasi
+    </button>
+  </div>
+
+  <div style="text-align: center;" *ngIf="Data.patroli_udara.length != 0">
+    <ion-card>
+      <ion-card-header>Patroli Udara</ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-label>Desa</ion-label>
+          <ion-select
+            placeholder="Pilih Desa"
+            [(ngModel)]="Data.patroli_udara.desa_kelurahan_id"
+          >
+            <ion-option *ngFor="let c of ListDesa" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cuaca Pagi</ion-label>
+          <ion-select
+            placeholder="Pilih Cuaca"
+            [(ngModel)]="Data.patroli_udara.cuaca_pagi_id"
+          >
+            <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cuaca Siang</ion-label>
+          <ion-select
+            placeholder="Pilih Cuaca"
+            [(ngModel)]="Data.patroli_udara.cuaca_siang_id"
+          >
+            <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cuaca Sore</ion-label>
+          <ion-select
+            placeholder="Pilih Cuaca"
+            [(ngModel)]="Data.patroli_udara.cuaca_sore_id"
+          >
+            <ion-option *ngFor="let c of ListCuaca" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Curah Hujan</ion-label>
+          <ion-select
+            placeholder="Pilih Curah Hujan"
+            [(ngModel)]="Data.patroli_udara.curah_hujan_id"
+          >
+            <ion-option *ngFor="let c of ListCurahHujan" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Suhu</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_udara.suhu"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kelembaban</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_udara.kelembaban"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kecepatan Angin</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_udara.kecepatan_angin"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>FFMC KKAS</ion-label>
+          <ion-select
+            placeholder="Pilih"
+            [(ngModel)]="Data.patroli_udara.ffmc_kkas_id"
+          >
+            <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>FWI ICK</ion-label>
+          <ion-select
+            placeholder="Pilih"
+            [(ngModel)]="Data.patroli_udara.fwi_id"
+          >
+            <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>DC KK</ion-label>
+          <ion-select
+            placeholder="Pilih"
+            [(ngModel)]="Data.patroli_udara.dc_kk_id"
+          >
+            <ion-option *ngFor="let c of ListArtifisial" [value]="c.id">{{
+              c.nama
+            }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Latitude</ion-label>
+          <ion-input
+            disabled="true"
+            [(ngModel)]="Data.patroli_udara.latitude"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Longitude</ion-label>
+          <ion-input
+            disabled="true"
+            [(ngModel)]="Data.patroli_udara.longitude"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Confidance</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_udara.confidence"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Distance</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_udara.distance"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Radial</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="Data.patroli_udara.radial"
+            placeholder="Masukan data (contoh: 20)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Kegiatan</ion-label>
+          <ion-input
+            [(ngModel)]="Data.patroli_udara.kegiatan"
+            placeholder="Masukan kegiatan"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Keterangan</ion-label>
+          <ion-input
+            [(ngModel)]="Data.patroli_udara.keterangan"
+            placeholder="Masukan keterangan"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
 </ion-content>
+<ion-footer>
+  <button ion-button (click)="goSave()" full>SAVE</button>
+</ion-footer>

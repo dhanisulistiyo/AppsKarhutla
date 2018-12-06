@@ -2,6 +2,8 @@ import { AccountPage } from "./../pages/account/account";
 import { NgModule, ErrorHandler } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
+import { TooltipsModule } from "ionic-tooltips";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MyApp } from "./app.component";
 
 import { AboutPage } from "../pages/about/about";
@@ -20,11 +22,12 @@ import { Camera } from "@ionic-native/camera";
 import { ListDataPage } from "../pages/list-data/list-data";
 import { InputDataKarhutlaPage } from "../pages/input-data-karhutla/input-data-karhutla";
 import { DetailsDataPage } from "../pages/details-data/details-data";
-import { GeneralServiceProvider } from '../providers/general-service';
+import { GeneralServiceProvider } from "../providers/general-service";
 import { HttpModule } from "@angular/http";
-import { PatroliServiceProvider } from '../providers/patroli-service';
-import { AuthServiceProvider } from '../providers/auth-service';
+import { PatroliServiceProvider } from "../providers/patroli-service";
+import { AuthServiceProvider } from "../providers/auth-service";
 import { LowerCase } from "../pipes/time-helper/time-helper";
+import { CurrentLocationPage } from "../pages/current-location/current-location";
 @NgModule({
   declarations: [
     MyApp,
@@ -37,15 +40,17 @@ import { LowerCase } from "../pipes/time-helper/time-helper";
     ListDataPage,
     InputDataKarhutlaPage,
     DetailsDataPage,
+    CurrentLocationPage,
     LowerCase
-
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: "true"
     }),
-    HttpModule
+    HttpModule,
+    TooltipsModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,7 +63,8 @@ import { LowerCase } from "../pipes/time-helper/time-helper";
     AccountPage,
     ListDataPage,
     InputDataKarhutlaPage,
-    DetailsDataPage
+    DetailsDataPage,
+    CurrentLocationPage
   ],
   providers: [
     StatusBar,
@@ -70,7 +76,7 @@ import { LowerCase } from "../pipes/time-helper/time-helper";
     Camera,
     GeneralServiceProvider,
     PatroliServiceProvider,
-    AuthServiceProvider,
+    AuthServiceProvider
   ]
 })
-export class AppModule { }
+export class AppModule {}

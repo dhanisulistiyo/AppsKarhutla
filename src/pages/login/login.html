@@ -1,40 +1,72 @@
-<ion-header>
-  <ion-title></ion-title>
-</ion-header>
+<ion-header> <ion-title></ion-title> </ion-header>
 
 <div class="scroll-content">
   <ion-content class="bg-img">
-
     <ion-card>
-      <img src="assets/imgs/logos.png" class="logo">
-      <ion-card-header>
-        Log In
-      </ion-card-header>
+      <!-- <img src="assets/imgs/logos.png" class="logo"> -->
+      <ion-card-header> Log In </ion-card-header>
 
       <ion-card-content hide-tabs>
         <form [formGroup]="LoginUser" (ngSubmit)="authLogin()" novalidate>
           <ion-list>
             <ion-item>
-              <ion-icon ios="ios-person" md="ios-person-outline" item-left></ion-icon>
-              <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+              <ion-icon
+                ios="ios-person"
+                md="ios-person-outline"
+                item-left
+              ></ion-icon>
+              <ion-input
+                formControlName="email"
+                type="text"
+                placeholder="Email"
+              ></ion-input>
             </ion-item>
             <ion-item>
-              <ion-icon ios="ios-lock" md="ios-lock-outline" item-left></ion-icon>
-              <ion-input formControlName="password" type="{{password}}" placeholder="Password"></ion-input>
-              <ion-icon *ngIf="password == 'password'" item-end style="height:32px;" ios="ios-eye" md="md-eye" style="font-size:25px;"
-                (click)="showHide()"></ion-icon>
-              <ion-icon *ngIf="password == 'text'" item-end style="height:32px;" ios="ios-eye-off" md="md-eye-off"
-                style="font-size:25px;" (click)="showHide()"></ion-icon>
+              <ion-icon
+                ios="ios-lock"
+                md="ios-lock-outline"
+                item-left
+              ></ion-icon>
+              <ion-input
+                formControlName="password"
+                type="{{password}}"
+                placeholder="Password"
+              ></ion-input>
+              <ion-icon
+                *ngIf="password == 'password'"
+                item-end
+                style="height:32px;"
+                ios="ios-eye"
+                md="md-eye"
+                style="font-size:25px;"
+                (click)="showHide()"
+              ></ion-icon>
+              <ion-icon
+                *ngIf="password == 'text'"
+                item-end
+                style="height:32px;"
+                ios="ios-eye-off"
+                md="md-eye-off"
+                style="font-size:25px;"
+                (click)="showHide()"
+              ></ion-icon>
             </ion-item>
-            <!-- <p class="p-right" (click)="forgetPassword()">Forgot Password?</p> -->
+            <!--
+              <p class="p-right" (click)="forgetPassword()">Forgot Password?</p>
+            -->
           </ion-list>
-          <button ion-button type="submit" class="btn-login" style="margin-top: 10%;margin-bottom: 10%;" full
-            [disabled]="!LoginUser.valid">Log
-            in
+          <button
+            ion-button
+            type="submit"
+            class="btn-login"
+            style="margin-top: 10%;margin-bottom: 10%;"
+            full
+            [disabled]="!LoginUser.valid"
+          >
+            Log in
           </button>
         </form>
       </ion-card-content>
-
     </ion-card>
   </ion-content>
 </div>
