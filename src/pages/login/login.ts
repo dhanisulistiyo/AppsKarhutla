@@ -29,8 +29,8 @@ export class LoginPage {
     public menuCtrl: MenuController
   ) {
     this.LoginUser = this.formBuilder.group({
-      email: ["dhani@gmail.com", Validators.required],
-      password: ["123", Validators.required]
+      email: ["", Validators.required],
+      password: ["", Validators.required]
     });
   }
   ionViewWillEnter() {
