@@ -69,7 +69,8 @@ export class GeneralServiceProvider {
       .subscribe(
         data => {
           console.log(data.data);
-          this.ListArtifisial = data.data;
+          this.ListArtifisial = data.data.sort(function(a, b) {
+            return (a.id - b.id);});
         },
         err => console.log(err)
       );
@@ -156,7 +157,7 @@ export class GeneralServiceProvider {
       .subscribe(
         data => {
           this.ListInventoriPatroli = data.data.map(item => {
-            return { inventori_id: item.id, nama: item.nama, jumlah_unit: 0 };
+            return { inventori_id: item.id, nama: item.nama, jumlah_unit: 1 };
           });
           console.log(this.ListInventoriPatroli);
         },
@@ -310,19 +311,6 @@ export class GeneralServiceProvider {
         }
       );
   }
-  getListKategoriPatroli() {
-    var url = this.conf.baseUrl + "/api/kategori-patroli/list";
-    return this.http
-      .get(url)
-      .map(res => res.json())
-      .subscribe(
-        data => {
-          console.log(data.data);
-          this.KategoriPatroli = data.data;
-        },
-        err => console.log(err)
-      );
-  }
   getListKeternganLokasi() {
     var headers = new Headers();
     let token = this.auth.AuthToken;
@@ -346,16 +334,15 @@ export class GeneralServiceProvider {
         }
       );
   }
-
-  getListDesa() {
-    var url = this.conf.baseUrl + "/api/desakelurahan/list";
+  getListKategoriPatroli() {
+    var url = this.conf.baseUrl + "/api/kategori-patroli/list";
     return this.http
       .get(url)
       .map(res => res.json())
       .subscribe(
         data => {
           console.log(data.data);
-          this.ListDesa = data.data;
+          this.KategoriPatroli = data.data;
         },
         err => console.log(err)
       );
@@ -408,6 +395,19 @@ export class GeneralServiceProvider {
         }
       );
   }
+  getListDesa() {
+    var url = this.conf.baseUrl + "/api/desakelurahan/list";
+    return this.http
+      .get(url)
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          console.log(data.data);
+          this.ListDesa = data.data;
+        },
+        err => console.log(err)
+      );
+  }
   getAllData() {
     if (this.KategoriPatroli.length == 0) this.getListKategoriPatroli();
     if (this.ListDesa.length == 0) this.getListDesa();
@@ -430,12 +430,13 @@ export class GeneralServiceProvider {
     if (this.KeteranganLokasi.length == 0) this.getListKeternganLokasi();
   }
 
+
   checkToken(): Promise<any> {
     return new Promise(resolve => {
       var headers = new Headers();
       let token = this.auth.AuthToken;
       headers.append("Authorization", "Bearer " + token);
-      var url = this.conf.baseUrl + "/api/kategori-anggota/list";
+      var url = this.conf.baseUrl + "/api/anggota/list";
       this.http
         .get(url, { headers: headers })
         .map(res => res.json())

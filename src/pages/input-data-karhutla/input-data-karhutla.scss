@@ -1,13 +1,72 @@
 page-input-data-karhutla {
+  .scroll-zoom-wrapper {
+    white-space: nowrap;
+  }
+
+  ion-scroll {
+    min-height: 270px;
+    height: auto;
+
+    .scroll-content {
+      padding: 0px !important;
+    }
+  }
+
+  ion-card img {
+    height: 180px;
+  }
+
+  .full-card {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+  }
+  ion-label {
+    color: #999;
+  }
+  ion-card {
+    .title {
+      font-size: 2rem;
+      text-align: center;
+    }
+    .card-header-new {
+      padding: 5px 5px 5px 10px;
+      font-size: 1rem;
+      color: #222;
+      background-color: #ef5350;
+    }
+    ion-card-header {
+      h2.card-title {
+        font-size: 3.8vw;
+        color: white;
+        font-weight: 600;
+      }
+    }
+    .card-content-md {
+      padding: 10px 0px;
+    }
+    .button-inner {
+      border-bottom: 1px solid gray;
+    }
+    .button-inner-no-color {
+      border-bottom: 0px;
+    }
+
+    ion-input {
+      border-bottom: 1px solid gray;
+    }
+    .item-cover {
+      padding-inline-start: inherit;
+    }
+    [col-9] {
+      align-self: center;
+    }
+  }
+
   .text-input[disabled] {
     opacity: 1;
   }
   .select-text {
     white-space: pre-wrap;
-  }
-
-  .card-header-md {
-    font-size: 2rem;
-    text-align: center;
   }
 }

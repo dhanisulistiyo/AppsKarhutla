@@ -8,4 +8,404 @@
   <ion-navbar> <ion-title>Details</ion-title> </ion-navbar>
 </ion-header>
 
-<ion-content padding> </ion-content>
+<ion-content>
+  <ion-card class="full-card" style="margin-top: 0px;">
+    <ion-card-header class="title">
+      Laporan Patroli <br />
+      Tanggal {{ Data.tanggal_patroli | date: "dd MMMM yyyy" }}
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card class="full-card">
+    <ion-card-header class="card-header-new" (click)="toggleDetails(toggle[0])">
+      <ion-row>
+        <ion-col col-8>
+          <h2 class="card-title">{{ toggle[0].info }}</h2>
+        </ion-col>
+        <ion-col
+          col-4
+          style="text-align:center;padding-left:15%;"
+          (click)="toggleDetails(toggle[0])"
+        >
+          <ion-icon
+            style="color: #fff; font-size:5.3vw;"
+            item-right
+            [name]="toggle[0].icon"
+            (click)="toggleDetails(toggle[0])"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content *ngIf="toggle[0].showDetails">
+      <ion-row *ngIf="Data.kategori_patroli != null">
+        <ion-col col-4>Kategori Patroli</ion-col>
+        <ion-col col-1> : </ion-col>
+        <ion-col>{{ Data.kategori_patroli.nama }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Aktivitas Patroli</ion-col>
+        <ion-col col-1> : </ion-col>
+        <ion-col
+          ><p *ngFor="let item of Data.aktivitas_harian_patroli; let i = index">
+            {{ item.aktivitas_harian.nama
+            }}<span *ngIf="i != Data.aktivitas_harian_patroli.length - 1"
+              >,
+            </span>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Anggota Patroli</ion-col>
+        <ion-col col-1> : </ion-col>
+        <ion-col>
+          <p *ngFor="let item of Data.anggota_patroli; let i = index">
+            {{ item.anggota.nama
+            }}<span *ngIf="i != Data.anggota_patroli.length - 1">, </span>
+          </p></ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Inventori Patroli</ion-col>
+        <ion-col col-1> : </ion-col>
+        <ion-col
+          ><p *ngFor="let item of Data.inventori_patroli; let i = index">
+            {{ item.inventori.nama
+            }}<span *ngIf="i != Data.inventori_patroli.length - 1">, </span>
+          </p></ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Satelite</ion-col>
+        <ion-col col-1> : </ion-col>
+        <ion-col
+          ><p *ngFor="let item of Data.hotspot; let i = index">
+            {{ item.satelit.nama
+            }}<span *ngIf="i != Data.hotspot.length - 1">, </span>
+          </p></ion-col
+        >
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="full-card">
+    <ion-card-header class="card-header-new" (click)="toggleDetails(toggle[4])">
+      <ion-row>
+        <ion-col col-8>
+          <h2 class="card-title">{{ toggle[4].info }}</h2>
+        </ion-col>
+        <ion-col
+          col-4
+          style="text-align:center;padding-left:15%;"
+          (click)="toggleDetails(toggle[4])"
+        >
+          <ion-icon
+            style="color: #fff; font-size:5.3vw;"
+            item-right
+            [name]="toggle[4].icon"
+            (click)="toggleDetails(toggle[4])"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content *ngIf="toggle[4].showDetails">
+      <div *ngIf="Data.dokumentasi.length > 0">
+        <ion-scroll scrollX="true" direction="x">
+          <ion-card
+            style="width: calc(100% - 70px); display: inline-block;"
+            *ngFor="let item of Data.dokumentasi; let i = index"
+          > 
+            <img src="{{ baseImg+item.url_file}}" />
+          </ion-card>
+        </ion-scroll>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="full-card">
+    <ion-card-header class="card-header-new" (click)="toggleDetails(toggle[1])">
+      <ion-row>
+        <ion-col col-8>
+          <h2 class="card-title">{{ toggle[1].info }}</h2>
+        </ion-col>
+        <ion-col
+          col-4
+          style="text-align:center;padding-left:15%;"
+          (click)="toggleDetails(toggle[1])"
+        >
+          <ion-icon
+            style="color: #fff; font-size:5.3vw;"
+            item-right
+            [name]="toggle[1].icon"
+            (click)="toggleDetails(toggle[1])"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content *ngIf="toggle[1].showDetails">
+      <ion-card *ngFor="let item of Data.patroli_darat; let i = index">
+        <ion-card-header style="text-align: center;">
+          Data Patroli {{ i + 1 }}
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-4>Desa</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.desa_kelurahan.nama }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4>Kecamatan</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.desa_kelurahan.kecamatan.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kabupaten/Kota</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.desa_kelurahan.kecamatan.kotakab.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>DAOPS</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{
+              item.desa_kelurahan.kecamatan.kotakab.daops.nama
+            }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Provinsi</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{
+              item.desa_kelurahan.kecamatan.kotakab.daops.provinsi.nama
+            }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Cuaca Pagi</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.cuaca_pagi.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Cuaca Siang</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.cuaca_siang.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Cuaca Sore</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.cuaca_sore.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Curah Hujan</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.curah_hujan.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Suhu</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.suhu }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kelembaban</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.kelembaban }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kecepatan Angin</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.kecepatan_angin }}</ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="item.ffmc_kkas != null">
+            <ion-col col-4>FFMC KKAS</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.ffmc_kkas.nama }}</ion-col>
+          </ion-row>
+          <ion-row *ngIf="item.fwi != null">
+            <ion-col col-4>FWI ICK</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.fwi.nama }}</ion-col>
+          </ion-row>
+          <ion-row *ngIf="item.dc_kk != null">
+            <ion-col col-4>DC KK</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.dc_kk.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kondisi Sumber Air</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col
+              ><p *ngFor="let items of item.kondisi_sumber_air; let i = index">
+                {{ items.sumber_air.name }} dengan panjang {{ items.panjang }}M
+                lebar {{ items.lebar }}M kedalaman {{ items.kedalaman }}M<span
+                  *ngIf="i != item.kondisi_sumber_air.length - 1"
+                  >,
+                </span>
+              </p></ion-col
+            >
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kondisi Vegetasi</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col
+              ><p *ngFor="let items of item.kondisi_vegetasi; let i = index">
+                {{ items.vegetasi.nama }} kondisi
+                {{ items.kategori_kondisi_vegetasi.nama }} dengan luas
+                {{ items.luas_tanah }}M<span
+                  *ngIf="i != item.kondisi_vegetasi.length - 1"
+                  >,
+                </span>
+              </p></ion-col
+            >
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kondisi Tanah</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col
+              ><p *ngFor="let items of item.kondisi_tanah; let i = index">
+                {{ items.tanah.nama }} kedalaman {{ items.kedalaman_gambut }}M
+                dengan luas {{ items.luas }}M<span
+                  *ngIf="i != item.kondisi_tanah.length - 1"
+                  >,
+                </span>
+              </p></ion-col
+            >
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Pemadaman</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col
+              ><p *ngFor="let items of item.pemadaman; let i = index">
+                lahan milik {{ items.pemilik_lahan.nama }} tipe kebakaran
+                {{ items.tipe_kebakaran.nama }} luas terbakar
+                {{ items.luas_terbakar }}M dipadamkan
+                {{ items.luas_dipadamkan }}M hasil {{ items.hasil_pemadaman }}
+                <span *ngIf="i != item.pemadaman.length - 1">, </span>
+              </p></ion-col
+            >
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="full-card">
+    <ion-card-header class="card-header-new" (click)="toggleDetails(toggle[2])">
+      <ion-row>
+        <ion-col col-8>
+          <h2 class="card-title">{{ toggle[2].info }}</h2>
+        </ion-col>
+        <ion-col
+          col-4
+          style="text-align:center;padding-left:15%;"
+          (click)="toggleDetails(toggle[2])"
+        >
+          <ion-icon
+            style="color: #fff; font-size:5.3vw;"
+            item-right
+            [name]="toggle[2].icon"
+            (click)="toggleDetails(toggle[2])"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content *ngIf="toggle[2].showDetails">
+      <ion-card *ngFor="let item of Data.patroli_udara; let i = index">
+        <ion-card-header style="text-align: center;">
+          Data Patroli {{ i + 1 }}
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-4>Desa</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.desa_kelurahan.nama }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4>Kecamatan</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.desa_kelurahan.kecamatan.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kabupaten/Kota</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.desa_kelurahan.kecamatan.kotakab.nama }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>DAOPS</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{
+              item.desa_kelurahan.kecamatan.kotakab.daops.nama
+            }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Provinsi</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{
+              item.desa_kelurahan.kecamatan.kotakab.daops.provinsi.nama
+            }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Suhu</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.suhu }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kelembaban</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.kelembaban }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Kecepatan Angin</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.kecepatan_angin }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Confidence</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.confidence }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Distance</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.distance }}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>Radial</ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col>{{ item.radial }}</ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="full-card">
+    <ion-card-header class="card-header-new" (click)="toggleDetails(toggle[3])">
+      <ion-row>
+        <ion-col col-8>
+          <h2 class="card-title">{{ toggle[3].info }}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+  <div *ngIf="toggle[3].showDetails" #map style="height:50%;"></div>
+</ion-content>

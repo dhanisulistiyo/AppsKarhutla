@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title>Patroli Hari ini</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item
+    style=" color: white !important;
+  background-color: #d32f2f;"
+  >
+    <ion-label
+      >Hotspot Sipongi <span *ngIf="isHotspot">(Aktif)</span>
+      <span *ngIf="!isHotspot">(Tidak Aktif)</span></ion-label
+    >
+    <ion-toggle
+      [(ngModel)]="isHotspot"
+      (ionChange)="getListHotspot()"
+    ></ion-toggle>
+  </ion-item>
+  <div #map style="height:100%;"></div>
+  <ion-fab right bottom>
+    <button ion-fab (click)="getListPatroli()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

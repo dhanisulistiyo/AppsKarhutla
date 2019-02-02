@@ -7,7 +7,7 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
-    <ion-title>List Laporan</ion-title>
+    <ion-title>Laporan {{ today | date: "dd MMMM yyyy" }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -18,57 +18,45 @@
         <ion-avatar item-start>
           <img src="../../assets/imgs/fire.png" />
         </ion-avatar>
-        <h2>{{ data.tanggal_patroli | date: "dd MMMM yyyy" }}</h2>
-        <!-- <h2>{{data.kategori_patroli.nama}}</h2> -->
+        <h2>Laporan {{ i + 1 }}</h2>
         <h3 *ngIf="data.kategori_patroli != null">
           Patroli {{ data.kategori_patroli.nama }}
         </h3>
-        <!-- <p>Lokasi : -6.00000, 13.00000</p> -->
+        <h4>
+          {{ data.patroli_darat.length }} patroli darat dan
+          {{ data.patroli_udara.length }} patroli udara
+        </h4>
       </ion-item>
       <ion-item-options>
-        <button ion-button>
+        <button ion-button (click)="goDetails(i)">
           <ion-icon
             ios="ios-information-circle"
             md="md-information-circle"
-            (click)="goDetails()"
           ></ion-icon
-          >Details
+          >Detail
         </button>
-        <button color="secondary" ion-button>
-          <ion-icon
-            ios="ios-create"
-            md="md-create"
-            (click)="goEditData(i)"
-          ></ion-icon
-          >Edit
+        <button
+          color="secondary"
+          ion-button
+          *ngIf="checkTime()"
+          (click)="goEditData(i)"
+        >
+          <ion-icon ios="ios-create" md="md-create"></ion-icon>Ubah
         </button>
-        <button color="danger" ion-button (click)="goDelete(data.id)">
-          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>Delete
+        <button
+          color="danger"
+          ion-button
+          (click)="goDelete(data.id)"
+          *ngIf="checkTime()"
+        >
+          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>Hapus
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
   <ion-fab right bottom>
-    <button ion-fab><ion-icon name="add"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button
-        ion-fab
-        (click)="goAddData('DARAT')"
-        tooltip="Patroli Darat"
-        positionH="left"
-        arrow
-      >
-        <ion-icon name="ios-car-outline"></ion-icon>
-      </button>
-      <button
-        ion-fab
-        (click)="goAddData('UDARA')"
-        tooltip="Patroli Udara"
-        positionH="left"
-        arrow
-      >
-        <ion-icon name="ios-plane-outline"></ion-icon>
-      </button>
-    </ion-fab-list>
+    <button ion-fab (click)="goAddData()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

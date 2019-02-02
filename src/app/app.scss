@@ -13,10 +13,14 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-$primary-color: #b00020;
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
+$primary-color: #d32f2f;
 
 .ios,
 .md {
+  font-family: "Poppins", sans-serif;
+
   ion-app .nav-decor {
     background-color: transparent !important;
   }
@@ -24,8 +28,14 @@ $primary-color: #b00020;
     border-color: #b2b2b2;
     background: $primary-color;
   }
-  .toolbar-content {
-    text-align: center;
+
+  //membuat tolbar rata tengah
+  // .toolbar-content {
+  //   text-align: center;
+  // }
+
+  .toolbar-title-md {
+    color: white;
   }
   .tabs {
     .tabbar {
@@ -44,7 +54,7 @@ $primary-color: #b00020;
     }
   }
   .content {
-    background-color: #f3f1f1f8;
+    background-color: #d3d3d3f8;
   }
   .bar-button {
     color: #ffffff;
@@ -53,5 +63,59 @@ $primary-color: #b00020;
   .button-md-light,
   .button-ios-light {
     background-color: #fff;
+  }
+
+  .fab {
+    background-color: #b00020;
+  }
+  .fab ion-icon {
+    color: white;
+  }
+
+  page-app {
+    .header-menu-user {
+      min-height: 160px;
+      .toolbar-background-md {
+        border-color: #4fd2c2; // background: #4fd2c2;
+        background-image: url("../assets/imgs/background.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .toolbar-title-md {
+        padding: 0 12px;
+        font-family: "Poppins", sans-serif;
+        font-size: 4vw;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+      }
+    }
+    .item-md ion-icon[item-left] + .item-inner,
+    .item-md ion-icon[item-left] + .item-input,
+    .item-md ion-icon[item-start] + .item-inner,
+    .item-md ion-icon[item-start] + .item-input {
+      margin-left: 4px;
+    }
+    .item-md h2 {
+      margin: 2px 0;
+      font-size: 4.6vw;
+      font-weight: 500;
+    }
+    .item-md .item-button {
+      padding: 0 0.6em;
+      height: 6vw; //font-size: 1.2rem;
+    }
+    ion-icon.custom-font {
+      color: $primary-color;
+      font-size: 6vw;
+      padding-top: 4px;
+    }
+    p.custom-text {
+      font-family: "Poppins", sans-serif;
+      font-size: 4vw;
+      font-weight: 500;
+      color: black;
+      text-align: left;
+    }
   }
 }

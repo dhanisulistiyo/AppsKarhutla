@@ -70,7 +70,7 @@ export class LoginPage {
     this.auth.login(this.LoginUser.value).subscribe(
       data => {
         console.log(data.data);
-        this.auth.storeUserCredentials(data.data.token);
+        this.auth.storeUserCredentials(data.data);
         loading.dismiss();
         this.zone.run(() => {
           this.navCtrl.setRoot(TabsPage);

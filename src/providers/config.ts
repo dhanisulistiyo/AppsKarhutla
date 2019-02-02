@@ -11,9 +11,11 @@ import { AlertController } from "ionic-angular";
 @Injectable()
 export class ConfigProvider {
   baseUrl;
+  baseImg;
   constructor( public alertCtrl : AlertController) {
     console.log("Hello ConfigProvider Provider");
     // this.baseUrl = "http://localhost:8080/siavipala/public";
+    this.baseImg = "http://103.129.220.174/siavipala/public/img/"
     this.baseUrl = "http://103.129.220.174/siavipala/public"
   }
 

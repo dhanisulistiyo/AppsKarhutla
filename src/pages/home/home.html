@@ -3,10 +3,13 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-    <ion-title>Hotspot</ion-title>
+    <ion-title>Hotspot SIPONGI</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div #map style="height:100%;"></div>
+  <ion-fab right bottom>
+    <button ion-fab (click)="getListHotspot()"><ion-icon name="refresh"></ion-icon></button>
+  </ion-fab>
 </ion-content>

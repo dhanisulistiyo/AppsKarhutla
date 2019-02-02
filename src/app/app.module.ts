@@ -1,3 +1,5 @@
+import { KamusPage } from "./../pages/kamus/kamus";
+import { MapsPatroliPage } from "./../pages/maps-patroli/maps-patroli";
 import { AccountPage } from "./../pages/account/account";
 import { NgModule, ErrorHandler } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
@@ -26,8 +28,12 @@ import { GeneralServiceProvider } from "../providers/general-service";
 import { HttpModule } from "@angular/http";
 import { PatroliServiceProvider } from "../providers/patroli-service";
 import { AuthServiceProvider } from "../providers/auth-service";
-import { LowerCase } from "../pipes/time-helper/time-helper";
 import { CurrentLocationPage } from "../pages/current-location/current-location";
+import { FunctionServiceProvider } from "../providers/function-service";
+import { InputDataServiceProvider } from "../providers/input-data-service";
+import { KamusServiceProvider } from "../providers/kamus-service";
+import { DetailKamusPage } from "../pages/detail-kamus/detail-kamus";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -41,7 +47,9 @@ import { CurrentLocationPage } from "../pages/current-location/current-location"
     InputDataKarhutlaPage,
     DetailsDataPage,
     CurrentLocationPage,
-    LowerCase
+    MapsPatroliPage,
+    KamusPage,
+    DetailKamusPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +72,10 @@ import { CurrentLocationPage } from "../pages/current-location/current-location"
     ListDataPage,
     InputDataKarhutlaPage,
     DetailsDataPage,
-    CurrentLocationPage
+    CurrentLocationPage,
+    MapsPatroliPage,
+    KamusPage,
+    DetailKamusPage
   ],
   providers: [
     StatusBar,
@@ -76,7 +87,10 @@ import { CurrentLocationPage } from "../pages/current-location/current-location"
     Camera,
     GeneralServiceProvider,
     PatroliServiceProvider,
-    AuthServiceProvider
+    AuthServiceProvider,
+    FunctionServiceProvider,
+    InputDataServiceProvider,
+    KamusServiceProvider
   ]
 })
 export class AppModule {}

@@ -1,0 +1,21 @@
+<!--
+  Generated template for the KamusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title>Kamus Istilah</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of Kamus; let i = index">
+    <button ion-item (click)="presentDetailModal(i)">
+      {{ item.title }}
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+    </button>
+  </ion-card>
+</ion-content>

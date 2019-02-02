@@ -1,4 +1,5 @@
 export class DataPatroli {
+  kegiatan_patroli_id = null;
   tanggal_patroli = null;
   kategori_patroli_id = null;
   inventori_patroli = [];
@@ -63,7 +64,7 @@ export class inventoriPatroli {
 
 export class hotspot {
   satelit_id = null;
-  deskripsi = "Nihil";
+  deskripsi = "";
   constructor() {}
 }
 
